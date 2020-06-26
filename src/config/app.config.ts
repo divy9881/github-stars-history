@@ -1,6 +1,6 @@
 const defaults = {
   persistedStore: {
-    name: 'pnowy.github-stars.store',
+    name: 'casbin.github-stars.store',
   },
 };
 

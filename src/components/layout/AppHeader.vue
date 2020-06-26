@@ -13,7 +13,7 @@
           <span class="navbar-item is-4 has-text-weight-bold">
             GitHub stars history and charts
           </span>
-          <a class="navbar-item" href="https://github.com/pnowy/github-stars-history" target="_blank">
+          <a class="navbar-item" href="https://github.com/casbin/github-stars-history" target="_blank">
             <span class="button">
               <b-icon icon="github" pack="fab"/>
             </span>
@@ -21,10 +21,10 @@
           <div class="navbar-item">
             <div class="paragraph--padding-top">
               <a class="github-button"
-                 href="https://github.com/pnowy/github-stars-history"
+                 href="https://github.com/casbin/github-stars-history"
                  data-size="large"
                  data-show-count="true"
-                 aria-label="Star pnowy/github-stars-history on GitHub">
+                 aria-label="Star casbin/github-stars-history on GitHub">
                 Star
               </a>
             </div>
