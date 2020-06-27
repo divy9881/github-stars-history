@@ -9,12 +9,19 @@ const ACCESS_TOKEN = [
   'c03b764344a095c32bec39c42228030e4a299a59',
 ];
 
+function getHeaders() {
+  const defaultHeaders = {
+    Accept: 'application/vnd.github.v3.star+json',
+  };
+  const personalToken = window.localStorage.getItem('PersonalGithubToken');
+  if (personalToken !== null) {
+    return { ...defaultHeaders, Authorization: `token ${personalToken}` };
+  }
+  return defaultHeaders;
+}
 const http = axios.create({
   headers: {
-    Accept: 'application/vnd.github.v3.star+json',
-  },
-  params: {
-    access_token: ACCESS_TOKEN[Math.floor(Math.random() * ACCESS_TOKEN.length)],
+    ...getHeaders(),
   },
 });
 

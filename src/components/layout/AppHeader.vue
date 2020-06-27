@@ -29,6 +29,7 @@
               </a>
             </div>
           </div>
+          <edit-token></edit-token>
         </div>
       </div>
     </div>
@@ -37,8 +38,13 @@
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
+  import EditToken from '@/components/EditToken.vue';
 
-  @Component
+  @Component({
+    components: {
+      EditToken,
+    },
+  })
   export default class AppHeader extends Vue {
   }
 </script>
