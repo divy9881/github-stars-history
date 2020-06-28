@@ -63,10 +63,10 @@
 
     private get filteredStacks() {
       const userStacks = this.stacks.filter((stack: Stack) => {
-        return stack.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
+        return stack.name && stack.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
       });
       const predefined = predefinedStacks.filter((stack: Stack) => {
-        return (stack.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && this.showPredefined);
+        return (stack.name && stack.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && this.showPredefined);
       });
       return predefined.concat(userStacks);
     }
