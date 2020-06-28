@@ -16,20 +16,29 @@ export default class EditToken extends Vue {
     if (personalToken !== null) {
       return personalToken.slice(0, 4) + '**';
     }
-    return 'Edit Github Token';
+    return 'Edit access token';
   }
 
   private prompt() {
+    const message = `
+       <p>Star-history use GitHub API to retrieve repository metadata. You may see this page because you have hit the <a href="https://developer.github.com/v3/#rate-limiting">GitHub API rate limit</a>. </p>
+       <br>
+       <p>Star-history will need your <a href="https://github.com/settings/tokens">personal access token</a> to unlimit it. If you don't already have one, <a href="https://github.com/settings/tokens/new">create one</a>, and paste it into the textbox below (no scope to your personal data is needed)</p>
+       <br>
+       <label class="label">access token (will be stored in your local storage)</label>`;
     this.$buefy.dialog.prompt({
-      message: 'Please input your github access token',
+      title: 'Edit GitHub access token',
+      confirmText: 'Save',
+      message,
       inputAttrs: {
-        placeholder: 'e.g. c50a5c173668a61a7dfe6cca80eb95754be7a079',
-        maxlength: 40,
+        value: window.localStorage.getItem('PersonalGithubToken'),
+        maxlength: 50,
       },
       trapFocus: true,
       onConfirm: (value) => {
         this.$buefy.toast.open(`Your token is: ${value}`);
         window.localStorage.setItem('PersonalGithubToken', value.trim());
+        this.$forceUpdate();
       },
     });
   }
