@@ -24,6 +24,9 @@
         <div class="column has-text-centered">
           <button class="button is-primary is-small" @click="download">Download PNG</button>
         </div>
+        <div class="column has-text-centered">
+          <button class="button is-primary is-small" @click="refreshAll">Refresh All</button>
+        </div>
       </div>
 
     </div>
@@ -91,6 +94,32 @@ export default class AppReposChart extends Vue {
     this.reloadRepos();
   }
 
+  private async refreshAll() {
+    this.reposData = [];
+    this.loaders = [];
+
+    this.repos.forEach((repoName) => {
+      this.loaders.push({
+        repoName,
+        loading: true,
+      });
+      this.refreshRepoData(repoName)
+        .then((repository: Repository) => {
+          this.reposData.push(repository);
+          if (repository.requiredCacheUpdate) {
+            this.saveRepoToStore(repository);
+          }
+        })
+        .catch((e: FetchStarsError) => {
+          notificationService.error(e.statusText);
+        })
+        .finally(() => {
+          _.remove(this.loaders, (li) => li.repoName === repoName);
+          this.$forceUpdate();
+        });
+    });
+  }
+
   private async reloadRepos() {
     this.reposData = [];
     this.loaders = [];
@@ -138,6 +167,16 @@ export default class AppReposChart extends Vue {
         } else {
           resolve(repository);
         }
+      });
+    }).catch((e: FetchStarsError) => {
+      return Promise.reject(e);
+    });
+  }
+
+  private refreshRepoData(repoName: string): Promise<Repository> {
+    return new Promise<Repository>((resolve) => {
+      firebaseReposRef.child(encode(repoName)).on('value', (snapshot) => {
+        resolve(starHistoryService.getStarHistory(repoName));
       });
     }).catch((e: FetchStarsError) => {
       return Promise.reject(e);
