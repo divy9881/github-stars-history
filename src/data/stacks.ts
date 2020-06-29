@@ -68,6 +68,15 @@ const stacks: Stack[] = [
     ],
     predefined: true,
   },
+  {
+    id: 'rust',
+    name: 'Rust',
+    repos: [
+      'casbin/casbin-rs',
+      'YosaiProject/rust-authz',
+    ],
+    predefined: true,
+  },
 ];
 
 export default stacks;
