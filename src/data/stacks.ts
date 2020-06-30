@@ -77,6 +77,15 @@ const stacks: Stack[] = [
     ],
     predefined: true,
   },
+  {
+    id: 'cpp',
+    name: 'C/C++',
+    repos: [
+      'casbin/casbin-cpp',
+      'AlexeyParhomenko/x-acl',
+    ],
+    predefined: true,
+  },
 ];
 
 export default stacks;
